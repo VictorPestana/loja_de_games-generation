@@ -1,6 +1,7 @@
 // produto.entity.ts
 import { IsNotEmpty, IsNumber, IsPositive } from "class-validator";
 import { Categoria } from "src/categoria/entities/categoria.entity";
+import { Usuario } from "src/usuario/entities/usuario.entity";
 import { NumericTransformer } from "src/util/numerictransformer";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -36,4 +37,9 @@ export class Produto {
 	@JoinColumn({ name: 'categoriaId' })
 	categoria: Categoria;
 
+	@ManyToOne(() => Usuario, (usuario) => usuario.produtos, {
+        onDelete: "CASCADE"
+    })
+    usuario: Usuario 
 }
+
